@@ -1,80 +1,39 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodList from '../components/FoodList';
+import { addToOrder } from '../actions/OrderAction';
 import './App.css';
 
-const menu = [
-  {
-    id: 1,
-    src: "http://lorempixel.com/400/200/food/1",
-    name: 'Chili Paneer',
-    description: 'Cottage Cheese stir fried with onions and bell peppers in a spicy sauce.',
-    spiceRating: 3
-  },
-  {
-    id: 8,
-    src: "http://lorempixel.com/400/200/food/8",
-    name: 'Vegetable Samosa',
-    description: 'A special dough pastry stuffed with potatoes and peas with five spice flavors.',
-    spiceRating: 3
-  },
-  {
-    id: 3,
-    src: "http://lorempixel.com/400/200/food/3",
-    name: 'Kadai Matar Paneer',
-    description: 'A national favorite curry containing cottage cheese and peas with blended spices.',
-    spiceRating: 3
-  },
-  {
-    id: 4,
-    src: "http://lorempixel.com/400/200/food/4",
-    name: 'Dal Tadka',
-    description: 'Cooked yellow lentils infused with cumin seeds, aromatic spices, and cilantro garnishing.',
-    spiceRating: 3
-  },
-  {
-    id: 5,
-    src: "http://lorempixel.com/400/200/food/5",
-    name: 'Vegetable Pulao',
-    description: 'Basmati rice prepared with garden fresh vegetables, cardamom, saffron, and cloves.',
-    spiceRating: 3
-  }
-];
-
 class App extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      menu,
-      order: []
-    }
-  }
-
-  handleAddToOrder(orderId) {
-    this.setState({
-      order:[
-        ...this.state.order,
-        orderId
-      ]
-    })
-  }
-
   render() {
     return (
       <div className="App">
-        <Header orderCount= {this.state.order.length}/>
+        <Header orderCount={this.props.order.length} />
         <div className="input-group margin-bottom-sm">
-          <input className="form-control" type="text" placeholder="Email address" />
+          <input className="form-control" type="text" placeholder="Food Item" />
           <span className="input-group-addon"><i className="fa fa-search" aria-hidden="true"></i></span>
         </div>
-        <FoodList menu={this.state.menu} onAddToOrder={(orderId) => this.handleAddToOrder(orderId)}/>
+        <FoodList menu={this.props.menu} onAddToOrder={(orderId) => this.props.addToOrder(orderId)} />
         <Footer />
       </div>
-
     );
   }
 }
 
-export default App;
+const mapStateToProps = function (state) {
+  return {
+    menu: state.menu,
+    order: state.order
+  }
+}
+
+const mapDispatchToProps = function (dispatch) {
+  return {
+    addToOrder: (id) => {
+      dispatch(addToOrder(id));
+    }
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(App);

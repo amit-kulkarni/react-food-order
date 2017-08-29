@@ -1,5 +1,6 @@
-import { createStore } from 'redux';
-import { foodOrderApp } from './reducers';
+import { createStore, applyMiddleware } from 'redux';
+import foodOrderApp  from './reducers';
+import logger from 'redux-logger';
 
 const menu = [
   {
@@ -45,4 +46,11 @@ const initialState = {
   order
 }
 
-export const store = createStore(foodOrderApp,initialState);
+const store = createStore(
+  foodOrderApp,
+  initialState,
+  applyMiddleware(
+    logger
+  )
+);
+export default store;

@@ -11,3 +11,9 @@ export function removeFromOrder(id) {
     payload: id
   }
 }
+
+export function getOrder(){
+  return {
+    type: "GET_ORDER"
+  }
+}
