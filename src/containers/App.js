@@ -3,19 +3,36 @@ import { connect } from 'react-redux';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import FoodList from '../components/FoodList';
+import Search from '../components/Search';
 import { addToOrder } from '../actions/OrderAction';
 import './App.css';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      filterText: ""
+    }
+  }
+
+  handleFilter(filterText) {
+    this.setState({
+      filterText: filterText
+    });
+  }
+
+  getFilteredMenu() {
+    return this.props.menu.filter((item) => {
+      return item.name.indexOf(this.state.filterText) > -1
+    })
+  }
+
   render() {
     return (
       <div className="App">
         <Header orderCount={this.props.order.length} />
-        <div className="input-group margin-bottom-sm">
-          <input className="form-control" type="text" placeholder="Food Item" />
-          <span className="input-group-addon"><i className="fa fa-search" aria-hidden="true"></i></span>
-        </div>
-        <FoodList menu={this.props.menu} onAddToOrder={(orderId) => this.props.addToOrder(orderId)} />
+        <Search onFilterFood={(filterText) => this.handleFilter(filterText)} />
+        <FoodList menu={this.getFilteredMenu()} onAddToOrder={(orderId) => this.props.addToOrder(orderId)} />
         <Footer />
       </div>
     );
