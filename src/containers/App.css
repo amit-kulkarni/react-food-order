@@ -1,22 +1,13 @@
-.App {
-  text-align: center;
-}
-
 .header {
   background-color: #382633;
   color: white;
   border-bottom: 2px solid #A5CC6B; 
+  text-align: center;
 }
 
 footer {
-  height: 50px;
+  min-height: 50px;
   background-color: #B9AF96;
-  display: table;
-  width: 100%;
 }
 
-footer span, footer a {
-  display: table-cell;
-  vertical-align: middle;
-}
 
