@@ -4,7 +4,7 @@ import FoodItem from './FoodItem';
 export default class FoodList extends React.Component {
   render() {
     return (
-      <div className="card-deck">
+      <div className="container">
         {
           this.props.menu.map((item) => {
             return (
