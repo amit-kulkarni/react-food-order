@@ -1,6 +1,7 @@
 import { createStore, applyMiddleware } from 'redux';
-import foodOrderApp  from './reducers';
+import foodOrderApp from './reducers';
 import logger from 'redux-logger';
+import thunk from 'redux-thunk';
 
 const menu = [
   {
@@ -9,7 +10,8 @@ const menu = [
     name: 'Chili Paneer',
     description: 'Cottage Cheese stir fried with onions and bell peppers in a spicy sauce.',
     spiceRating: 3,
-    price: 100
+    price: 100,
+    quantity: 0
   },
   {
     id: 8,
@@ -17,7 +19,8 @@ const menu = [
     name: 'Vegetable Samosa',
     description: 'A special dough pastry stuffed with potatoes and peas with five spice flavors.',
     spiceRating: 3,
-    price: 30
+    price: 30,
+    quantity: 0
   },
   {
     id: 3,
@@ -25,7 +28,8 @@ const menu = [
     name: 'Kadai Matar Paneer',
     description: 'A national favorite curry containing cottage cheese and peas with blended spices.',
     spiceRating: 3,
-    price: 80
+    price: 80,
+    quantity: 0
   },
   {
     id: 4,
@@ -33,7 +37,8 @@ const menu = [
     name: 'Dal Tadka',
     description: 'Cooked yellow lentils infused with cumin seeds, aromatic spices, and cilantro garnishing.',
     spiceRating: 3,
-    price: 50
+    price: 50,
+    quantity: 0
   },
   {
     id: 5,
@@ -41,7 +46,8 @@ const menu = [
     name: 'Vegetable Pulao',
     description: 'Basmati rice prepared with garden fresh vegetables, cardamom, saffron, and cloves.',
     spiceRating: 3,
-    price: 120
+    price: 120,
+    quantity: 0
   }
 ];
 const order = [];
@@ -55,7 +61,8 @@ const store = createStore(
   foodOrderApp,
   initialState,
   applyMiddleware(
-    logger
+    logger,
+    thunk
   )
 );
 export default store;

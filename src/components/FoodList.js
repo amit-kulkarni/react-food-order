@@ -4,13 +4,17 @@ import FoodItem from './FoodItem';
 export default class FoodList extends React.Component {
   render() {
     return (
-      <div className="container">
+      <div>
         {
-          this.props.menu.map((item) => {
-            return (
-              <FoodItem key={item.id} {...item} onAddToOrder={() => this.props.onAddToOrder(item.id)}/>
-            );
-          })
+          this.props.menu
+            .filter((item) => {
+              return item.name.toUpperCase().indexOf(this.props.filterText.toUpperCase()) > -1
+            })
+            .map((item) => {
+              return (
+                <FoodItem key={item.id} {...item} onAddToOrder={(orderId, qty) => this.props.onAddToOrder(orderId, qty)} />
+              );
+            })
         }
       </div>
     );

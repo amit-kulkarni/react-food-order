@@ -10,4 +10,9 @@ footer {
   background-color: #B9AF96;
 }
 
-
+.food-item {
+  border-bottom: 1px dotted #806D40;
+}
+.food-item img {
+  border: 1px solid #806D40;
+}
