@@ -17,7 +17,7 @@ export function addToOrder(id, qty) {
   return (dispatch, getState) => {
 
     const doesOrderExist = getState().order.some((item) => {
-      return item.id == id
+      return item.id === id
     });
 
     if (doesOrderExist) {
@@ -35,8 +35,8 @@ export function removeFromOrder(id) {
   }
 }
 
-export function getOrder() {
+export function getOrders() {
   return {
-    type: "GET_ORDER"
+    type: "GET_ORDERS"
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { Link } from 'react-router';
 import { addToOrder } from '../actions/OrderAction';
 
 import FoodList from '../components/FoodList';
@@ -22,13 +22,18 @@ class MenuDisplay extends React.Component {
 
   render() {
     return (
-      <div className="container">
+      <div >
         <Search onFilterFood={(filterText) => this.handleFilter(filterText)} />
         <FoodList
           menu={this.props.menu}
           filterText={this.state.filterText}
           onAddToOrder={(orderId, qty) => this.props.addToOrder(orderId, qty)}
         />
+        <div className="row">
+          <div className="col-md-12">
+            <Link to="/order-confirm" className="btn btn-secondary mb-3 mt-0 float-right">Next</Link>
+          </div>
+        </div>
       </div>
     );
   }

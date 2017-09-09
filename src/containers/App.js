@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import MenuDisplay from './MenuDisplay';
+
 
 import './App.css';
 
@@ -12,8 +12,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Header orderCount={this.props.order.length} />
-        <main>
-          <MenuDisplay />
+        <main className="container">
+          {this.props.children}
         </main>
         <Footer />
       </div>
